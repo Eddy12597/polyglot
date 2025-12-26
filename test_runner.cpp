@@ -27,7 +27,7 @@ static string esc_bold  = "\033[1m";
 
 CommandResult runCommand(const std::string& cmd) {
     // add logging
-    std::cout << esc_magenta << "\tCmd: " << cmd << esc_reset << std::endl;
+    // std::cout << esc_magenta << "\tCmd: " << cmd << esc_reset << std::endl;
 
     std::array<char, 256> buffer;
     std::string result;
@@ -125,6 +125,10 @@ int main() {
         {testDir + "/test.sh",  testDir + "/test.cpp", testDir + "/out.cpp", "g++", testDir + "/out", exePrefix + "out" + exeSuffix, "bash "   + testDir + "/out.cpp"},
         {testDir + "/test.pl",  testDir + "/test.cpp", testDir + "/out.cpp", "g++", testDir + "/out",
         exePrefix + "out" + exeSuffix, "perl "   + testDir + "/out.cpp"},
+        {testDir + "/test.vn", testDir + "/test.cpp", testDir + "/out.cpp", "g++",
+        testDir + "/out"},
+        {testDir + "/test.vn", testDir + "/test.cpp", testDir + "/out.cpp", "g++",
+        testDir + "/out", exePrefix + "out" + exeSuffix, "vastnova " + testDir + "/out.cpp"}
     };
 
     vector<PairDef> combos_c_style = {
@@ -135,6 +139,8 @@ int main() {
         {testDir + "/test.c", testDir + "/test.sh", testDir + "/out.c", "gcc", testDir + "/out", exePrefix + "out" + exeSuffix, "bash "   + testDir + "/out.c"},
         {testDir + "/test.sh", testDir + "/test.c", testDir + "/out.c", "gcc", testDir + "/out", exePrefix + "out" + exeSuffix, "bash "   + testDir + "/out.c"},
         {testDir + "/test.pl", testDir + "/test.c", testDir + "/out.c", "gcc", testDir + "/out", exePrefix + "out" + exeSuffix, "perl "   + testDir + "/out.c"},
+        {testDir + "/test.vn", testDir + "/test.c", testDir + "/out.c", "gcc",
+        testDir + "/out", exePrefix + "out" + exeSuffix, "vastnova " + testDir + "/out.c"}
     };
 
     // Build tests

@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import sys
 import subprocess
 from pathlib import Path
@@ -30,8 +28,10 @@ def check_syntax(file_path, ext) -> bool:
         return True
     elif ext == '.py':
         res = run_cmd(f"python3 -m pyflakes {file_str} 2>&1")
+        if res.strip(): res = run_cmd(f"python -m pyflakes {file_str} 2>&1")
         if res.strip():
             res = run_cmd(f"python3 -m py_compile {file_str} 2>&1")
+            if res.strip(): res = run_cmd(f"python -m py_compile {file_str} 2>&1")
             if res.strip():
                 print(f"Python syntax errors in {file_str}:\n{res}")
                 print("If python file does not have syntax errors, please check if pyflakes is installed.")
@@ -55,6 +55,8 @@ def check_syntax(file_path, ext) -> bool:
             print(f"Perl syntax errors in {file_str}:\n{res}")
             return False
         return True
+    elif ext == ".vn":
+        return True
     else:
         print(f"Unsupported file extension: {ext}")
         return False
@@ -70,6 +72,7 @@ Supported extensions:
   Ruby: .rb
   Bash: .sh
   Perl: .pl
+  VastNova: .vn
 """
     
     parser = argparse.ArgumentParser(usage=usage_str)
@@ -113,6 +116,7 @@ Supported extensions:
         if ext == '.rb': return "=begin"
         if ext == '.sh': return ": '"
         if ext == '.pl': return "=pod"
+        if ext == ".vn": return "!#"
         return ""
 
     def close_fence(ext):
@@ -120,6 +124,7 @@ Supported extensions:
         if ext == '.rb': return "=end"
         if ext == '.sh': return "'"
         if ext == ".pl": return "=cut"
+        if ext == ".vn": return "#!"
         return ""
 
     # Write merged file

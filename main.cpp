@@ -103,6 +103,8 @@ bool checkSyntax(const std::string& file, const std::string& ext) {
             return false;
         }
         return true;
+    } else if (ext == ".vn") {
+        return true; // unsupported
     }
 
     std::cerr << "\nUnsupported file extension: " << ext << "\n";
@@ -131,6 +133,7 @@ void writeMerged(
         if (ext == ".rb") return "=begin";
         if (ext == ".sh") return ": '";
         if (ext == ".pl") return "=pod";
+        if (ext == ".vn") return "!#";
         return "";
     };
 
@@ -139,6 +142,7 @@ void writeMerged(
         if (ext == ".rb") return "=end";
         if (ext == ".sh") return "'";
         if (ext == ".pl") return "=cut";
+        if (ext == ".vn") return "#!";
         return "";
     };
 

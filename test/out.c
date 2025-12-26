@@ -1,5 +1,5 @@
 #if 0
-=pod
+!#
 #endif
 #include <stdio.h>
 
@@ -8,8 +8,8 @@ int main() {
     return 0;
 }
 #if 0
-=cut
+#!
 #endif
 #if 0
-print "Hello from perl!";
+out "Hello from VastNova!"
 #endif
